@@ -1,6 +1,9 @@
+import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_pokemon/module/home/models/pokemon.dart';
+import 'package:flutter_pokemon/module/pokemon_info/pages/poke_info.dart';
+import 'package:flutter_pokemon/module/pokemon_info/pokemon_info.dart';
 import 'package:flutter_pokemon/util/gradient.dart';
 import 'package:flutter_pokemon/util/styles.dart';
 
@@ -17,9 +20,8 @@ class _HomePageState extends State<HomePage> {
 
   @override
   void initState() {
-    // TODO: implement initState
     super.initState();
-//    pokemonBloc.getPokemon();
+    pokemonBloc.getPokemon();
   }
 
   @override
@@ -64,7 +66,7 @@ class _HomePageState extends State<HomePage> {
 }
 
 Widget _pokemonList(PokemonBloc pokemonBloc, Color colors) {
-  return StreamBuilder<List<PokemonUrl>>(
+  return StreamBuilder<List<PokemonDetails>>(
       initialData: [],
       stream: pokemonBloc.subject.stream,
       builder: (context, snapshot) {
@@ -100,10 +102,10 @@ Widget _buildSearchBar() {
 }
 
 Widget _buildItemList(
-    PokemonUrl pokemonUrl, Color colors, BuildContext context) {
+    PokemonDetails pokemonDetails, Color colors, BuildContext context) {
   return GestureDetector(
     onTap: () {
-      onSelectedItem(colors, context, pokemonUrl);
+      onSelectedItem(colors, context, pokemonDetails);
     },
     child: Column(
       mainAxisSize: MainAxisSize.min,
@@ -117,11 +119,30 @@ Widget _buildItemList(
             children: <Widget>[
               Row(
                 children: <Widget>[
-                  Image.network(
-                      'https://pokeres.bastionbot.org/images/pokemon/${pokemonUrl.id}.png',
-                      width: 50.0,
-                      height: 50.0,
-                      fit: BoxFit.cover),
+                  Stack(
+                    children: <Widget>[
+                      Align(
+                        alignment: Alignment.bottomCenter,
+                        child: Image.asset(
+                          "assets/images/pokemon_menu.png",
+                          width: 20,
+                          height: 20,
+                          color: Colors.white.withOpacity(0.14),
+                        ),
+                      ),
+                      CachedNetworkImage(
+                        imageUrl:
+                        'https://pokeres.bastionbot.org/images/pokemon/${pokemonDetails.id}.png',
+                        imageBuilder: (context, image) => Image(
+                          image: image,
+                          width: 30,
+                          height: 30,
+                          alignment: Alignment.bottomCenter,
+//                      color: selectedIndex == index ? null : Colors.black26,
+                        ),
+                      ),
+                    ],
+                  ),
                   SizedBox(
                     width: 10.0,
                   ),
@@ -129,11 +150,11 @@ Widget _buildItemList(
                     crossAxisAlignment: CrossAxisAlignment.start,
                     children: <Widget>[
                       Text(
-                        pokemonUrl.name,
+                        pokemonDetails.name,
                         style: TextStyle(fontSize: 20.0),
                       ),
                       Text(
-                        '#00' + pokemonUrl.id.toString(),
+                        '#00' + pokemonDetails.id.toString(),
                         style: TextStyle(color: Colors.grey, fontSize: 15),
                       ),
                     ],
@@ -163,58 +184,61 @@ Widget _buildItemList(
   );
 }
 
-void onSelectedItem(Color color, BuildContext context, PokemonUrl pokemonUrl) {
-  showDialog(
-      barrierDismissible: true,
-      context: context,
-      builder: (context) => Dialog(
-            shape: RoundedRectangleBorder(
-              borderRadius: BorderRadius.circular(10.0),
-            ),
-            child: Padding(
-              padding: const EdgeInsets.only(left: 8.0,right: 8.0,top: 12.0,bottom: 12.0),
-              child: Row(
-                mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                children: <Widget>[
-                  Row(
-                    children: <Widget>[
-                      Image.network(
-                          'https://pokeres.bastionbot.org/images/pokemon/${pokemonUrl.id}.png',
-                          width: 50.0,
-                          height: 50.0,
-                          fit: BoxFit.cover),
-                      SizedBox(
-                        width: 10.0,
-                      ),
-                      Column(
-                        mainAxisSize: MainAxisSize.min,
-                        children: <Widget>[
-                          Text(
-                            pokemonUrl.name,
-                            style: TextStyle(fontSize: 20.0),
-                          ),
-                          Text(
-                            '#00' + pokemonUrl.id.toString(),
-                            style: TextStyle(color: Colors.grey, fontSize: 15),
-                          ),
-                        ],
-                      )
-                    ],
-                  ),
-                  Row(
-                    children: <Widget>[
-                      Image.asset(
-                        'assets/images/icon1.png',
-                        width: 40.0,
-                        height: 40.0,
-                        fit: BoxFit.cover,
-                      ),
-                    ],
-                  ),
-                ],
-              ),
-            ),
-          ));
+void onSelectedItem(Color color, BuildContext context, PokemonDetails pokemonDetails) {
+  Navigator.push(context, MaterialPageRoute(builder: (context) => PokemonInfo(pokemonDetails: pokemonDetails,)));
+
+
+//  showDialog(
+//      barrierDismissible: true,
+//      context: context,
+//      builder: (context) => Dialog(
+//            shape: RoundedRectangleBorder(
+//              borderRadius: BorderRadius.circular(10.0),
+//            ),
+//            child: Padding(
+//              padding: const EdgeInsets.only(left: 8.0,right: 8.0,top: 12.0,bottom: 12.0),
+//              child: Row(
+//                mainAxisAlignment: MainAxisAlignment.spaceBetween,
+//                children: <Widget>[
+//                  Row(
+//                    children: <Widget>[
+//                      Image.network(
+//                          'https://pokeres.bastionbot.org/images/pokemon/${pokemonDetails.id}.png',
+//                          width: 50.0,
+//                          height: 50.0,
+//                          fit: BoxFit.cover),
+//                      SizedBox(
+//                        width: 10.0,
+//                      ),
+//                      Column(
+//                        mainAxisSize: MainAxisSize.min,
+//                        children: <Widget>[
+//                          Text(
+//                            pokemonDetails.name,
+//                            style: TextStyle(fontSize: 20.0),
+//                          ),
+//                          Text(
+//                            '#00' + pokemonDetails.id.toString(),
+//                            style: TextStyle(color: Colors.grey, fontSize: 15),
+//                          ),
+//                        ],
+//                      )
+//                    ],
+//                  ),
+//                  Row(
+//                    children: <Widget>[
+//                      Image.asset(
+//                        'assets/images/icon1.png',
+//                        width: 40.0,
+//                        height: 40.0,
+//                        fit: BoxFit.cover,
+//                      ),
+//                    ],
+//                  ),
+//                ],
+//              ),
+//            ),
+//          ));
 
 //
 //  showDialog(

@@ -7,8 +7,8 @@ import 'package:rxdart/rxdart.dart';
 
 class PokemonBloc{
   final PokemonRepo _pokemonRepo = PokemonRepo();
-  final StreamController <List<PokemonUrl>> _subject =
-  BehaviorSubject<List<PokemonUrl>>();
+  final StreamController <List<PokemonDetails>> _subject =
+  BehaviorSubject<List<PokemonDetails>>();
 
   getPokemon() async {
     await _pokemonRepo.getPokemonList().then((pokemon){
@@ -19,5 +19,5 @@ class PokemonBloc{
   dispose() {
     _subject.close();
   }
-  BehaviorSubject<List<PokemonUrl>> get subject => _subject;
+  BehaviorSubject<List<PokemonDetails>> get subject => _subject;
 }

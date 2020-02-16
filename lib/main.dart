@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_pokemon/module/home/pages/home_page.dart';
+import 'package:flutter_pokemon/module/pokemon_info/pages/poke_info.dart';
 import 'package:flutter_pokemon/widget/bottom_navigation.dart';
 import 'package:flutter_pokemon/widget/splash_screen.dart';
 

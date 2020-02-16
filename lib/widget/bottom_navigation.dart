@@ -77,9 +77,9 @@ class _BottomNavigationState extends State<BottomNavigation> {
             BottomNavigationBarItem(
                 icon: Icon(Icons.home), title: Text("Pokemon",style: TextStyle(color: ColorsAPP.gradientStart),)),
             BottomNavigationBarItem(
-                icon: Icon(Icons.motorcycle), title: Text("Move",style: TextStyle(color: ColorsAPP.gradientStart),)),
+                icon: Icon(Icons.motorcycle), title: Text("Moves",style: TextStyle(color: ColorsAPP.gradientStart),)),
             BottomNavigationBarItem(
-                icon: Icon(Icons.store), title: Text("",style: TextStyle(color: ColorsAPP.gradientStart),)),
+                icon: Icon(Icons.store), title: Text("Itens",style: TextStyle(color: ColorsAPP.gradientStart),)),
 
           ]),
       body: _widgetOptions.elementAt(_selectedIndex),
