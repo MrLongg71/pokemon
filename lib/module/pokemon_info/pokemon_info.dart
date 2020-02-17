@@ -6,7 +6,9 @@ import 'package:flutter_pokemon/widget/slide_up_panel.dart';
 
 class PokemonInfo extends StatefulWidget {
   PokemonDetails pokemonDetails;
+
   PokemonInfo({this.pokemonDetails});
+
   @override
   _PokemonInfoState createState() => _PokemonInfoState();
 }
@@ -56,11 +58,14 @@ class _PokemonInfoState extends State<PokemonInfo>
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      backgroundColor: Colors.blue,
       body: Stack(
         children: <Widget>[
           AnimatedBuilder(
             animation: _cardHeightController,
-            child: PokemonTabInfo(pokemonDetails: widget.pokemonDetails,),
+            child: PokemonTabInfo(
+              pokemonDetails: widget.pokemonDetails,
+            ),
             builder: (context, child) {
               return SlidingUpPanel(
                 controller: _cardController,
@@ -73,7 +78,9 @@ class _PokemonInfoState extends State<PokemonInfo>
           IntrinsicHeight(
             child: Container(
               key: _pokemonInfoKey,
-              child: PokemonOverallInfo(pokemonDetails: widget.pokemonDetails,),
+              child: PokemonOverallInfo(
+                pokemonDetails: widget.pokemonDetails,
+              ),
             ),
           ),
         ],

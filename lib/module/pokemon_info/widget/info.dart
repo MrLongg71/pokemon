@@ -153,7 +153,7 @@ class _PokemonOverallInfoState extends State<PokemonOverallInfo>
                       pokemon.name,
                       key: _currentTextKey,
                       style: TextStyle(
-                        color: Colors.red,
+                        color: Colors.white,
                         fontWeight: FontWeight.w900,
                         fontSize: 36 - (36 - 22) * value,
                       ),
@@ -174,7 +174,7 @@ class _PokemonOverallInfoState extends State<PokemonOverallInfo>
                   child: Text(
                     pokemon.id.toString(),
                     style: TextStyle(
-                      color: Colors.yellow,
+                      color: Colors.white,
                       fontWeight: FontWeight.w900,
                       fontSize: 18,
                     ),
