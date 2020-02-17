@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_pokemon/module/home/pages/home_page.dart';
+import 'package:flutter_pokemon/module/itens/pages/itens_page.dart';
 import 'package:flutter_pokemon/module/move/pages/move_page.dart';
 import 'package:flutter_pokemon/util/colors.dart';
 import 'package:flutter_pokemon/widget/splash_screen.dart';
@@ -66,6 +67,7 @@ class _BottomNavigationState extends State<BottomNavigation> {
   List<Widget> _widgetOptions = <Widget>[
     HomePage(),
     MovesPage(),
+    ItensPage(),
   ];
   @override
   Widget build(BuildContext context) {
