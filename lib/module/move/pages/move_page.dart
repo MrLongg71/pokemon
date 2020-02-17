@@ -3,6 +3,7 @@ import 'package:flutter_pokemon/module/move/bloc/move_bloc.dart';
 import 'package:flutter_pokemon/module/move/models/move.dart';
 import 'package:flutter_pokemon/util/gradient.dart';
 import 'package:flutter_pokemon/util/styles.dart';
+import 'package:flutter_pokemon/widget/loading_task.dart';
 
 class MovesPage extends StatefulWidget {
   @override
@@ -65,13 +66,16 @@ Widget _moveList(MoveBloc moveBloc) {
         if (snapshot.hasError) {
           return Text('Có lỗi xảy ra');
         }
-        return ListView.builder(
-            padding: EdgeInsets.all(5.0),
-            shrinkWrap: true,
-            itemCount: snapshot.data.length,
-            itemBuilder: (context, index) {
-              return _buildItemList(snapshot.data[index]);
-            });
+        return LoadingTask(
+          bloc: moveBloc,
+          child: ListView.builder(
+              padding: EdgeInsets.all(5.0),
+              shrinkWrap: true,
+              itemCount: snapshot.data.length,
+              itemBuilder: (context, index) {
+                return _buildItemList(snapshot.data[index]);
+              }),
+        );
       });
 }
 
@@ -84,7 +88,10 @@ Widget _buildItemList(Move move) {
         Row(
           mainAxisAlignment: MainAxisAlignment.spaceBetween,
           children: <Widget>[
-            Text(move.name,style: TextStyle(fontSize: 18),),
+            Text(
+              move.name,
+              style: TextStyle(fontSize: 18),
+            ),
             Image.asset(
               'assets/images/icon1.png',
               width: 30.0,
@@ -94,7 +101,7 @@ Widget _buildItemList(Move move) {
           ],
         ),
         Container(
-          margin: EdgeInsets.only(top: 5.0,bottom: 5.0),
+          margin: EdgeInsets.only(top: 5.0, bottom: 5.0),
           width: double.infinity,
           height: 1.0,
           color: Colors.grey[300],

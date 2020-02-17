@@ -5,7 +5,7 @@ class APIPokemon {
     BaseOptions options = new BaseOptions(
         baseUrl: "https://pokeapi.co/api/",
         connectTimeout: 30000,
-        receiveTimeout: 5000);
+        receiveTimeout: 50000);
     Dio dio = new Dio(options);
     return dio;
   }
@@ -13,7 +13,7 @@ class APIPokemon {
     BaseOptions options = new BaseOptions(
         baseUrl: "",
         connectTimeout: 30000,
-        receiveTimeout: 5000);
+        receiveTimeout: 50000);
     Dio dio = new Dio(options);
     return dio;
   }

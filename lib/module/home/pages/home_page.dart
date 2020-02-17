@@ -6,6 +6,7 @@ import 'package:flutter_pokemon/module/pokemon_info/pages/poke_info.dart';
 import 'package:flutter_pokemon/module/pokemon_info/pokemon_info.dart';
 import 'package:flutter_pokemon/util/gradient.dart';
 import 'package:flutter_pokemon/util/styles.dart';
+import 'package:flutter_pokemon/widget/loading_task.dart';
 
 import '../bloc/pokemon_bloc.dart';
 
@@ -73,13 +74,16 @@ Widget _pokemonList(PokemonBloc pokemonBloc, Color colors) {
         if (snapshot.hasError) {
           return Text('Có lỗi xảy ra');
         }
-        return ListView.builder(
-            padding: EdgeInsets.all(5.0),
-            shrinkWrap: true,
-            itemCount: snapshot.data.length,
-            itemBuilder: (context, index) {
-              return _buildItemList(snapshot.data[index], colors, context);
-            });
+        return LoadingTask(
+          bloc: pokemonBloc,
+          child: ListView.builder(
+              padding: EdgeInsets.all(5.0),
+              shrinkWrap: true,
+              itemCount: snapshot.data.length,
+              itemBuilder: (context, index) {
+                return _buildItemList(snapshot.data[index], colors, context);
+              }),
+        );
       });
 }
 
