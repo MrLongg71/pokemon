@@ -28,41 +28,38 @@ class _HomePageState extends State<HomePage> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-        body: SingleChildScrollView(
-      child: Column(
-        mainAxisSize: MainAxisSize.min,
-        children: <Widget>[
-          Container(
-            height: MediaQuery.of(context).size.height * 0.17,
-            child: Stack(
-              children: <Widget>[
-                GradientAPP(),
-                Padding(
-                  padding: const EdgeInsets.only(top: 35.0),
-                  child: Column(
-                    mainAxisAlignment: MainAxisAlignment.start,
-                    children: <Widget>[
-                      Padding(
-                        padding: const EdgeInsets.all(8.0),
-                        child: Text(
-                          "Pokemon",
-                          style: Styles.pokemon,
+        body: Column(
+          mainAxisSize: MainAxisSize.min,
+          children: <Widget>[
+            Container(
+              height: MediaQuery.of(context).size.height * 0.17,
+              child: Stack(
+                children: <Widget>[
+                  GradientAPP(),
+                  Padding(
+                    padding: const EdgeInsets.only(top: 35.0),
+                    child: Column(
+                      mainAxisAlignment: MainAxisAlignment.start,
+                      children: <Widget>[
+                        Padding(
+                          padding: const EdgeInsets.all(8.0),
+                          child: Text(
+                            "Pokemon",
+                            style: Styles.pokemon,
+                          ),
                         ),
-                      ),
-                      _buildSearchBar(),
-                    ],
+                        _buildSearchBar(),
+                      ],
+                    ),
                   ),
-                ),
-              ],
+                ],
+              ),
             ),
-          ),
-          GradientContainer(),
-          Container(
-              margin: EdgeInsets.all(10.0),
-              child: _pokemonList(pokemonBloc, colorItem)),
-        ],
-      ),
-    ));
+            GradientContainer(),
+            Expanded(
+                child: _pokemonList(pokemonBloc, colorItem)),
+          ],
+        ));
   }
 }
 

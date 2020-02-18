@@ -24,4 +24,5 @@ class PokemonBloc extends BaseBloc{
     _subject.close();
   }
   BehaviorSubject<List<PokemonDetails>> get subject => _subject;
+
 }
